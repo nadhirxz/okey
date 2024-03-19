@@ -1,0 +1,16 @@
+{
+	"name": "@okey/server",
+	"version": "0.1.0",
+	"scripts": {
+		"build": "node esbuild",
+		"start": "node dist/index.js",
+		"dev": "ts-node-dev -r tsconfig-paths/register -r dotenv-mono/load --respawn --transpile-only src/index.ts"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.11.29",
+		"esbuild": "^0.20.2",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.4.2"
+	}
+}
