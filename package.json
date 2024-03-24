@@ -3,11 +3,14 @@
 	"private": true,
 	"scripts": {
 		"build": "turbo build",
-		"dev": "turbo dev"
+		"dev": "turbo dev",
+		"server": "turbo dev --filter @okey/server",
+		"web": "turbo dev --filter @okey/web"
 	},
 	"devDependencies": {
 		"@okey/server": "*",
 		"@okey/utils": "*",
+		"@okey/web": "*",
 		"dotenv-cli": "^7.4.1",
 		"dotenv-mono": "^1.3.14",
 		"prettier": "^3.2.5",
