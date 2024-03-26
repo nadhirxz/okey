@@ -1,26 +1,32 @@
 import { NUMBER_OF_PLAYERS, NUMBER_OF_TILES_PER_PLAYER } from '@okey/utils/constants';
 import Tile from './tile';
-import { chooseOkeyTile, getBoardTiles, shuffleBoardTiles } from './utils';
+import { chooseJoker, getBoardTiles, shuffleBoardTiles } from './utils';
 
 class Board {
 	private _tiles: Tile[];
-	private _okey: Tile;
+	private _joker: Tile;
+	private _wildTile: Tile;
 
 	constructor() {
 		const allTiles = getBoardTiles();
 		const shuffled = shuffleBoardTiles(allTiles);
-		const { okey, tiles } = chooseOkeyTile(shuffled);
+		const { joker, wildTile, restOfDeck } = chooseJoker(shuffled);
 
-		this._tiles = tiles;
-		this._okey = okey;
+		this._tiles = restOfDeck;
+		this._joker = joker;
+		this._wildTile = wildTile;
 	}
 
 	get tiles(): Tile[] {
 		return this._tiles;
 	}
 
-	get okey(): Tile {
-		return this._okey;
+	get joker(): Tile {
+		return this._joker;
+	}
+
+	get wildTile(): Tile {
+		return this._wildTile;
 	}
 
 	drawTile(): Tile {
