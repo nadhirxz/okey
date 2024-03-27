@@ -1,3 +1,6 @@
 {
-	"name": "@okey/utils"
+	"name": "@okey/utils",
+	"dependencies": {
+		"argon2": "^0.40.1"
+	}
 }
