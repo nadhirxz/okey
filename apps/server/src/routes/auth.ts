@@ -33,4 +33,8 @@ router.post('/login', noAuth, async (req, res) => {
 		});
 });
 
+router.post('/logout', async (req, res) => {
+	res.clearCookie('access_token').status(200).json({ success: true });
+});
+
 export default router;
