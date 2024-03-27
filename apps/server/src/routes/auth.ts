@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import prisma from '@okey/database/client';
 import { verifyPassword } from '@okey/utils/hashing';
-import { generateAccessToken, generateRefreshToken } from '@okey/auth';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '@okey/auth';
 import { noAuth } from '../middlewares/auth';
 
 const router = Router();
@@ -35,6 +35,24 @@ router.post('/login', noAuth, async (req, res) => {
 
 router.post('/logout', async (req, res) => {
 	res.clearCookie('access_token').status(200).json({ success: true });
+});
+
+router.post('/refresh', async (req, res) => {
+	const { token: refreshToken } = req.body;
+
+	if (!refreshToken) return res.status(401).json({ success: false, error: 'Invalid token' });
+
+	try {
+		const payload = verifyRefreshToken(refreshToken);
+		const user = await prisma.user.findUnique({ where: { id: payload.id } });
+
+		if (!user) throw 401;
+
+		const accessToken = generateAccessToken(user);
+		res.cookie('access_token', accessToken).status(200).json({ success: true });
+	} catch (error) {
+		return res.status(401).json({ success: false, error: 'Invalid token' });
+	}
 });
 
 export default router;
