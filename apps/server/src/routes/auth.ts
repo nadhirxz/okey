@@ -2,9 +2,13 @@ import { Router } from 'express';
 import prisma from '@okey/database/client';
 import { verifyPassword } from '@okey/utils/hashing';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '@okey/auth';
-import { noAuth } from '../middlewares/auth';
+import { auth, noAuth } from '../middlewares/auth';
 
 const router = Router();
+
+router.get('/', auth, async (_, res) => {
+	res.status(200).send();
+});
 
 router.post('/login', noAuth, async (req, res) => {
 	const { email, password } = req.body;
