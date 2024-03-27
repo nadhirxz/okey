@@ -8,6 +8,7 @@
 		"web": "turbo dev --filter @okey/web"
 	},
 	"devDependencies": {
+		"@okey/auth": "*",
 		"@okey/database": "*",
 		"@okey/server": "*",
 		"@okey/utils": "*",
