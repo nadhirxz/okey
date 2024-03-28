@@ -1,6 +1,7 @@
 {
 	"name": "@okey/utils",
 	"dependencies": {
+		"@paralleldrive/cuid2": "^2.2.2",
 		"argon2": "^0.40.1"
 	}
 }
