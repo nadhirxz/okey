@@ -1,22 +1,20 @@
-import type { PlayerId } from '../types/game';
+import { User } from '@okey/database';
 import type Tile from './tile';
 
 class Player {
-	private _id: PlayerId;
+	public id: User['id'];
+	public index: number;
 	private _hand: Tile[];
 	private _isDealer: boolean = false;
 	private _isTurn: boolean = false;
 	private _opened: boolean = false;
 
-	constructor(id: PlayerId, hand: Tile[], isDealer: boolean = false, isTurn = false) {
-		this._id = id;
+	constructor(id: User['id'], index: number, hand: Tile[], isDealer: boolean = false, isTurn = false) {
+		this.id = id;
+		this.index = index;
 		this._hand = hand;
 		this._isDealer = isDealer;
 		this._isTurn = isTurn;
-	}
-
-	get id(): PlayerId {
-		return this._id;
 	}
 
 	get hand(): Tile[] {
